@@ -11,7 +11,7 @@
 
   # Custom KDE Global Theme
   home.file.".local/share/plasma/look-and-feel/assfucker!".source =
-    ../themes/kde/look-and-feel/assfucker!;
+    ../themes/kde/look-and-feel/"assfucker!";
 
   programs.plasma = {
     enable = true;
