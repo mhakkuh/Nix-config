@@ -1,12 +1,24 @@
 {
-  description = "Testconfig for nix";
+  description = "Testconfig for Nix";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, ... }: {
-    packages.x86_64-linux.hello =
-      nixpkgs.legacyPackages.x86_64-linux.hello;
-  };
+  outputs = { nixpkgs, home-manager, ... }:
+    {
+      homeConfigurations.mrhakkuh =
+        home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+
+          modules = [
+            ./packages.nix
+          ];
+        };
+    };
 }
